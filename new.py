@@ -41,22 +41,14 @@ def ask(pname: str):
         if result:
             name, description, steps, ingredients = result[0]
 
-            # Format steps without numbering, removes any leading or trailing whitespace from the steps
-            formatted_steps = steps.strip()
+            dict_response = {
+                "name" : name,
+                "description" : description,
+                "steps" : steps,
+                "ingredients" : ingredients
+            }
 
-            # Number ingredients
-            ingredients_list = ingredients['Ingredients']
-            formatted_ingredients = "\n".join(
-                [f"{idx + 1}. {ingredient}" for idx, ingredient in enumerate(ingredients_list)])
-
-            formatted_response = (
-                f"Name: {name}\n\n"
-                f"Description: {description}\n\n"
-                f"Steps:\n{formatted_steps}\n\n"
-                f"Ingredients:\n{formatted_ingredients}"
-            )
-
-            return Response(content=formatted_response, media_type="text/plain")
+            return dict_response
 
         else:
             return {"error": "Recipe not found"}
