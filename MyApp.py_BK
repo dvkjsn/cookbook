@@ -1,0 +1,27 @@
+from typing import Union
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+import datetime
+
+# get the current date and time
+now = str(datetime.datetime.now())
+
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World, Now the time is:" + now}
+
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Union[str, None] = None):
+   return {"greeting": "Hello," + q }
+
+
+@app.get("/greet/{myname}")
+def greet(myname: Union[str, None] = None):
+    return {"greeting": "Hello," + myname }
+
+###  http://127.0.0.1:8000/items/5?q=test
