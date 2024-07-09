@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+    <script type="text/javascript" src="scriptCOPY.js"></script>
+</head>
+<body>
+<table border=2 width=100%>
+    <tr> <!-- row -->
+        <td colspan=2><h2 align=center>Cookbook</h2></td> <!-- column -->
+    </tr>
+    <tr>
+        <td><h3> Name:</h3></td>
+        <td><h3 id="name"></h3></td> <!-- will be populated with data -->
+    </tr>
+    <tr>
+        <td><h6> Description:</h6></td>
+        <td><h6 id="description"></h6></td> <!-- will be populated with data -->
+    </tr>
+    <tr>
+        <td><h6>Ingredients:</h6></td>
+        <td>  <!-- table data -->
+            <ul id="ingredients"></ul> <!-- will be populated with data -->
+        </td>
+    </tr>
+    <tr>
+        <td colspan=2 align=left><h6>Steps:</h6></td>
+    </tr>
+    <tr>
+        <td colspan=2 align=left>
+            <p id="steps"></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select name="Recipes For:" id="Recipe_options">  <!-- select tag creates drop down menu-->
+                <option value="Peanut Butter and Jelly Sandwich">Peanut Butter and Jelly Sandwich</option>
+                <option value="Chocolate Chip Cookies">Chocolate Chip Cookies</option>
+                <option value="Grilled Cheese Sandwich">Grilled Cheese Sandwich</option>
+                <option value="Tomato Soup">Tomato Soup</option>
+                <option value="Scrambled Eggs">Scrambled Eggs</option>
+                <option value="Brownie">Brownie</option>
+                <option value="French Toast">French Toast</option>
+                <option value="Vanilla Sponge Cake">Vanilla Sponge Cake</option>
+                <option value="Broccoli Cheddar Soup">Broccoli Cheddar Soup</option>
+                <option value="Fried Rice">Fried Rice</option>
+                <option value="Tater Tots">Tater Tots</option>
+            </select>
+        </td>
+        <td>
+            <button id="myButton" onclick="get_recipe(Recipe_options.value)">Get Recipe</button>  <!-- when button is clicked, it calls the corresponding recipe values-->
+        </td>
+    </tr>
+</table>
+<script type="text/javascript"> // JavaScript code
+window.onload = (event) => {  // event handler that executes JavaScript code when the entire webpage has loaded
+    get_recipe(document.getElementById('Recipe_options').value); // call the get_recipe function with the selected recipe's value
+};
+</script>
+</body>
+</html>

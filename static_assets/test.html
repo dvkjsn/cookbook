@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+    <h3 Recipe Name:</h3><h3 id="name"></h3>
+    <h6> Description:</h6><h6 id="description"></h6>
+    <h6>ingredients:</h6><ul id="ingredients"></h6>
+    </ul>
+     <h6>Steps:</h6><p id="steps"></p>
+
+    <select name="Recipes For:" id="Recipe_options">
+  <option value="Dosa">Dosa</option>
+  <option value="Chocolate Chip Cookies">Chocolate Chip Cookies</option>
+  <option value="Jelly">Jelly</option>
+  <option value="Oreos">Oreos</option>
+</select>
+
+<button id="myButton">Get Recipe</button>
+     <script type="text/javascript" src="/Users/srinidhisivakaminathan/Desktop/cookbook/static_assets/scriptCOPY.js"></script>
+    <script>
+         //alert('Hello, this is a function attached using an event listener!');
+        // Attach an event listener to the button
+       // document.getElementById('myButton').addEventListener('click', myFunction);
+        document.getElementById('myButton').addEventListener('click',get_recipe);
+
+    </script>
+
+</body>
+</html>

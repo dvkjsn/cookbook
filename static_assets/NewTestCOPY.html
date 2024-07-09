@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+
+</head>
+<body>
+
+<script type="text/javascript"
+        src="/Users/srinidhisivakaminathan/Desktop/cookbook/static_assets/scriptCOPY.js"></script>
+<table border=1 width=80%>
+    <tr>
+        <td colspan=2><h2 align=center>Cooking Recipes just for you ...</td>
+    </tr>
+    <tr>
+        <td><h3> Name:</h3></td>
+        <td><h3 id="name"></h3></td>
+    </tr>
+    <tr>
+        <td><h6> Description:</h6></td>
+        <td><h6 id="description"></h6></td>
+    </tr>
+    <tr>
+        <td><h6>ingredients:</h6></td>
+        <td>
+            <ul id="ingredients"></h6>    </ul>
+        </td>
+    </tr>
+    <tr>
+        <td colspan=2 align=left><h6>Steps:</h6></td>
+    </tr>
+    <tr>
+        <td colspan=2 align=left>
+            <p id="steps"></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select name="Recipes For:" id="Recipe_options">
+                <option value="Peanut Butter and Jelly Sandwich">Peanut Butter and Jelly Sandwich</option>
+                <option value="Chocolate Chip Cookies">Chocolate Chip Cookies</option>
+                <option value="Grilled Cheese Sandwich">Grilled Cheese Sandwich</option>
+                <option value="Tomato Soup">Tomato Soup</option>
+                <option value="Scrambled Eggs">Scrambled Eggs</option>
+                <option value="Brownie">Brownie</option>
+                <option value="French Toast">French Toast</option>
+                <option value="Vanilla Sponge Cake">Vanilla Sponge Cake</option>
+                <option value="Brocoli Cheddar Soup">Brocoli Cheddar Soup</option>
+                <option value="Fried Rice">Fried Rice</option>
+                <option value="Tater Tots">Tater Tots</option>
+
+            </select>
+
+        </td>
+        <td>
+            <button id="myButton" onclick="get_recipe(Recipe_options.value)">Get Recipe</button>
+        </td>
+    </tr>
+    <table>
+        <script type="text/javascript"
+                window.onload=(event)
+        => {
+  //alert("page is fully loaded");
+  get_recipe(Recipe_options.value);
+};
+        </script>
+</body>
+</html>
