@@ -1,9 +1,11 @@
 from typing import Union
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 import psycopg2
 import datetime
 
 app = FastAPI()
+app.mount("/static_assets", StaticFiles(directory="static_assets"), name="static_assets")
 
 # get the current date and time
 now = str(datetime.datetime.now())

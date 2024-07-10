@@ -1,4 +1,8 @@
+window.onload = (event) => {  // event handler that executes JavaScript code when the entire webpage has loaded
+    get_recipe(document.getElementById('Recipe_options').value); // call the get_recipe function with the selected recipe's value
+};
 function get_recipe(RECIPE_FOR) {
+
     const recipes = {
         'Chocolate Chip Cookies': {
             name: "Chocolate Chip Cookies",
