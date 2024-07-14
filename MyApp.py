@@ -1,11 +1,31 @@
 from typing import Union
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 import psycopg2
 import datetime
 
 app = FastAPI()
 app.mount("/static_assets", StaticFiles(directory="static_assets"), name="static_assets")
+
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+	"http://localhost.tiangolo.com",
+	"https://localhost.tiangolo.com",
+	"http://localhost:63342",
+	"http://127.0.0.1:8080"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 
 # get the current date and time
 now = str(datetime.datetime.now())
@@ -44,6 +64,7 @@ AND R.Name = %s
 Group by Name, Description, Steps
 """
 	try:
+		###return {"out": "This is a test", }
 		conn = psycopg2.connect( host = hostname, dbname = database, user = username, password = pwd, port = port_id)
 
 		cur = conn.cursor()
