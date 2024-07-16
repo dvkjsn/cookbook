@@ -75,7 +75,7 @@ Group by Name, Description, Steps
 		print (error)
 
 	finally:
-		if cur is not None: 
+		if cur is not None:
 			cur.close()
 		if conn is not None:
 			conn.close()
