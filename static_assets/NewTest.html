@@ -7,20 +7,21 @@
 </head>
 <body>
     <h2>Cookbook</h2>
-    <div>
-        <label for="searchInput">Search for a Recipe:</label>
+    <div>  <!-- Start of a container div element -->
+        <label for="searchInput">Search for a Recipe:</label>  <!-- Label for the input field -->
         <input type="text" id="searchInput" placeholder="Enter recipe name">
-        <button onclick="searchRecipe()">Search</button>
+        <!-- Text input field, id attribute is "searchInput" to link with the label,  placeholder attribute provides a hint to the user about what to enter in the input field  -->
+        <button onclick="searchRecipe()">Search</button> <!-- Button that, when clicked, will call the JavaScript function "searchRecipe" -->
     </div>
     <hr>
     <div>
-        <h3><U>Name:</U> </h3>
-            <h3 id="name"></h3>
-        <h4>Description:</h4>
+        <h3><U>Name:</U> </h3> <!-- header -->
+            <h4 id="name"></h4> <!-- placeholder -->
+        <h3><U>Description:</U></h3>
          <p id="description"></p>
-        <h4>Ingredients:</h4>
+        <h3><U>Ingredients:</U></h3>
         <ul id="ingredients"></ul>
-        <h4>Steps:</h4>
+        <h3><U>Steps:</U></h3>
         <p id="steps"></p>
     </div>
 </body>

@@ -8,7 +8,7 @@ import datetime
 app = FastAPI()
 app.mount("/static_assets", StaticFiles(directory="static_assets"), name="static_assets")
 
-origins = [
+origins = [ # Define a list of origins (URLs) that are allowed to make cross-origin requests to the application
     "http://localhost",
     "http://localhost:8080",
 	"http://localhost.tiangolo.com",
@@ -17,12 +17,12 @@ origins = [
 	"http://127.0.0.1:8080"
 ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+app.add_middleware( # Add CORS middleware to the FastAPI application (`app`) with specific configurations
+    CORSMiddleware, # Use the CORSMiddleware provided by FastAPI for handling CORS
+    allow_origins=origins,  # Allow requests from the origins specified in the `origins` list
+    allow_credentials=True, # Allow credentials (like cookies, HTTP authentication) in cross-origin requests
+    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, PUT, DELETE, etc.) in cross-origin requests
+    allow_headers=["*"], # Allow all HTTP headers in cross-origin requests
 )
 
 
@@ -54,7 +54,6 @@ def ask(pname: Union[str, None] = None):
 	port_id = 5432
 	conn = None
 	cur = None
-	###SQL = "SELECT * FROM EMPLOYEE WHERE Name = '" + pname +"'"
 	SQL = """
 Select R.Name, R.Description, R.steps,
 	json_build_object('Ingredients',json_agg(I.Ingredient_Name || ': ' || I.Quantity || ' ' || I.unit))
@@ -64,9 +63,7 @@ AND R.Name = %s
 Group by Name, Description, Steps
 """
 	try:
-		###return {"out": "This is a test", }
 		conn = psycopg2.connect( host = hostname, dbname = database, user = username, password = pwd, port = port_id)
-
 		cur = conn.cursor()
 		cur.execute(SQL,(pname,))
 		return {"out":  cur.fetchall()}
