@@ -1,43 +1,41 @@
-
 body {
-    font-family:Didot, serif;
+    font-family: Didot, serif;
     margin: 30px;
     padding: 0;
     background-color: #E6E6FA;
     color: #4B0082;
-
-}
-/*
-h2 {
-    text-align: center;
-    color: #7B68EE;
 }
 
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
+.search-box {
+    width: 600px;
+    background: #fff;
+    margin: 20px auto;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+}
+
+input[type="text"] {
+    flex: 1;
+    height: 40px;
+    padding: 8px;
+    margin-right: 10px;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-label {
-    font-weight: bold;
-}
-
-input[type="text"] {
-    width: 50%;
-    padding: 8px;
-    margin: 5px 0;
-    box-sizing: border-box;
-}
-
 button {
-    padding: 10px 20px;
+    height: 40px;
+    padding: 0 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -45,46 +43,47 @@ button:hover {
     background-color: #45a049;
 }
 
-
-#steps {
-    white-space: pre-line;
-}
-*/
-.search-box{
-    width: 600px;
-    background: #fff;
-    margin: 200px auto 0;
+.result-box {
+    margin-top: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    background: #f9f9f9;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
-.row{
-    display: flex;
-    align-items: center;
-    padding: 10px 20 px;
+.result-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-input{
-    flex: 1;
-    height: 50px;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    font-size: 18px;
-    color: #333;
-}
-
-.result-box ul{
-    border-top: 1px solid #999;
-    padding: 15px 10px;
-}
-
-.result_box ul li{
-    list-style: none;
-    border-radius: 3px;
-    padding: 13px 10px;
+.result-box li {
+    padding: 10px;
     cursor: pointer;
 }
 
-.result-box ul li:hover{
-    background: #e9f3ff;
+.result-box li:hover {
+    background-color: #f0f0f0;
+}
+
+.recipe-details {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.recipe-details h3, .recipe-details h4 {
+    margin: 0;
+}
+
+.recipe-details ul {
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+.recipe-details p {
+    white-space: pre-line;
 }
