@@ -3,27 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Recipes</title>
-    <script type="text/javascript" src="scriptCopy.js"></script>
     <link rel="stylesheet" href="Style.css">
 </head>
 <body>
     <h2>Cookbook</h2>
-    <div>  <!-- Start of a container div element -->
-        <label for="searchInput">Search for a Recipe:</label>  <!-- Label for the input field -->
-        <input type="text" id="searchInput" placeholder="Enter recipe name">
+
+   <!--<div> -->
+        <!--<label for="searchInput">Search for a Recipe:</label>  -->
+        <!--<input type="text" id="searchInput" placeholder="Enter recipe name">-->
         <!-- Text input field, id attribute is "searchInput" to link with the label,  placeholder attribute provides a hint to the user about what to enter in the input field  -->
-        <button onclick="searchRecipe()">Search</button> <!-- Button that, when clicked, will call the JavaScript function "searchRecipe" -->
+        <!--<button onclick="searchRecipe()">Search</button>  -->
+<!--</div> -->
+<!--<hr>-->
+<!--<div>-->
+        <!--<h3><U>Name:</U> </h3>  -->
+            <!--<h4 id="name"></h4> -->
+        <!--<h3><U>Description:</U></h3>-->
+         <!--<p id="description"></p>-->
+        <!--<h3><U>Ingredients:</U></h3>-->
+        <!--<ul id="ingredients"></ul>-->
+        <!--<h3><U>Steps:</U></h3>-->
+        <!--<p id="steps"></p>-->
+<!--</div>-->
+
+    <div class = "search-box">
+        <div class = "row">
+            <input type = "text" id = "input-box" placeholder="Search anything" autocomplete="off">
+            <button>search</button>
+        </div>
+        <div class = "result-box">
+        </div>
     </div>
-    <hr>
-    <div>
-        <h3><U>Name:</U> </h3> <!-- header -->
-            <h4 id="name"></h4> <!-- placeholder -->
-        <h3><U>Description:</U></h3>
-         <p id="description"></p>
-        <h3><U>Ingredients:</U></h3>
-        <ul id="ingredients"></ul>
-        <h3><U>Steps:</U></h3>
-        <p id="steps"></p>
-    </div>
+
 </body>
+ <script type="text/javascript" src="scriptCopy.js"></script>
 </html>

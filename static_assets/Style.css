@@ -1,12 +1,13 @@
+
 body {
     font-family:Didot, serif;
-    margin: 20px;
+    margin: 30px;
     padding: 0;
     background-color: #E6E6FA;
     color: #4B0082;
 
 }
-
+/*
 h2 {
     text-align: center;
     color: #7B68EE;
@@ -44,39 +45,46 @@ button:hover {
     background-color: #45a049;
 }
 
-hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
+
+#steps {
+    white-space: pre-line;
+}
+*/
+.search-box{
+    width: 600px;
+    background: #fff;
+    margin: 200px auto 0;
+    border-radius: 5px;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    padding: 10px 20 px;
+}
+
+input{
+    flex: 1;
+    height: 50px;
+    background: transparent;
     border: 0;
-    border-top: 1px solid #ccc;
-}
-
-h3 {
-    margin-bottom: 10px;
-    text-decoration: underline;
-}
-
-h4 {
-    margin: 0;
-}
-
-p {
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-
-ul {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    padding-left: 20px;
-}
-
-/* Additional styling for specific elements */
-#name {
+    outline: 0;
     font-size: 18px;
     color: #333;
 }
 
-#steps {
-    white-space: pre-line; /* Preserve line breaks in <p> element */
+.result-box ul{
+    border-top: 1px solid #999;
+    padding: 15px 10px;
+}
+
+.result_box ul li{
+    list-style: none;
+    border-radius: 3px;
+    padding: 13px 10px;
+    cursor: pointer;
+}
+
+.result-box ul li:hover{
+    background: #e9f3ff;
 }

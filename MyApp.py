@@ -8,9 +8,6 @@ app = FastAPI()
 app.mount("/static_assets", StaticFiles(directory="static_assets"), name="static_assets")
 
 
-
-
-
 # get the current date and time
 now = str(datetime.datetime.now())
 
