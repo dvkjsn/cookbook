@@ -1,89 +1,87 @@
+/* Set the default styling for the body of the webpage */
 body {
-    font-family: Didot, serif;
-    margin: 30px;
-    padding: 0;
-    background-color: #E6E6FA;
-    color: #4B0082;
+    font-family: Didot, serif; /* Use Didot font, fallback to serif */
+    margin: 30px; /* Add margin around the body */
+    padding: 0; /* Remove default padding */
+    background-color: #E6E6FA; /* Set a light lavender background color */
+    color: #4B0082; /* Set the text color to indigo */
 }
 
+/* Style for the search box container */
 .search-box {
-    width: 600px;
-    background: #fff;
-    margin: 20px auto;
-    border-radius: 5px;
-    padding: 10px;
+    width: 600px; /* Set the width of the search box */
+    background: #fff; /* Set the background color to white */
+    margin: 20px auto; /* Center the search box horizontally and add vertical margin */
+    border-radius: 5px; /* Round the corners of the search box */
+    padding: 10px; /* Add padding inside the search box */
 }
 
+/* Style for row elements to align items horizontally */
 .row {
-    display: flex;
-    align-items: center;
+    display: flex; /* Use flexbox layout(dynamically change size) */
+    align-items: center; /* Center items vertically */
 }
 
+/* Style for the input text field */
 input[type="text"] {
-    flex: 1;
-    height: 40px;
-    padding: 8px;
-    margin-right: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    flex: 1; /* Allow the input to grow and fill available space */
+    height: 40px; /* Set the height of the input field */
+    padding: 8px; /* Add padding inside the input field */
+    margin-right: 10px; /* Add space to the right of the input field */
+    font-size: 16px; /* Set the font size of the text */
+    border: 1px solid #ccc; /* Add a light gray border */
+    border-radius: 5px; /* Round the corners of the input field */
 }
 
-button {
-    height: 40px;
-    padding: 0 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
+/* Style for the result box container */
 .result-box {
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background: #f9f9f9;
-    max-height: 300px;
-    overflow-y: auto;
+    margin-top: 10px; /* Add space above the result box */
+    border: 1px solid #ccc; /* Add a light gray border */
+    border-radius: 5px; /* Round the corners of the result box */
+    background: #f9f9f9; /* Set a light gray background color */
+    max-height: 300px; /* Set a maximum height */
+    overflow-y: auto; /* Add a vertical scrollbar if content overflows */
 }
 
+/* Remove default styling for the list inside the result box */
 .result-box ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
 }
 
+/* Style for each list item in the result box */
 .result-box li {
-    padding: 10px;
-    cursor: pointer;
+    padding: 10px; /* Add padding inside each list item */
+    cursor: pointer; /* Change the cursor to pointer on hover */
 }
 
+/* Change the background color of list items on hover */
 .result-box li:hover {
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; /* Set a slightly darker background color */
 }
 
+/* Style for the recipe details container */
 .recipe-details {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background: #f9f9f9;
+    margin-top: 20px; /* Add space above the recipe details */
+    padding: 10px; /* Add padding inside the recipe details container */
+    border: 1px solid #ccc; /* Add a light gray border */
+    border-radius: 5px; /* Round the corners of the recipe details */
+    background: #f9f9f9; /* Set a light gray background color */
 }
 
+/* Style for headings inside the recipe details */
 .recipe-details h3, .recipe-details h4 {
-    margin: 0;
+    margin: 0; /* Remove default margin */
 }
 
+/* Add margin and padding for lists inside the recipe details */
 .recipe-details ul {
-    margin-top: 5px;
-    padding-left: 20px;
+    margin-top: 5px; /* Add space above the list */
+    padding-left: 20px; /* Add space to the left of the list items */
 }
 
+/* Preserve whitespace in paragraphs inside the recipe details */
 .recipe-details p {
-    white-space: pre-line;
+    white-space: pre-line; /* Preserve whitespace and add line breaks */
 }
