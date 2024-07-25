@@ -1,7 +1,5 @@
-// Get the input box element by its ID
+// Get the input box element and result box element by its ID(placeholder)
 const inputBox = document.getElementById("input-box");
-
-// Get the result box element by its ID
 const resultBox = document.getElementById("result-box");
 
 // Add an event listener to the input box to handle 'input' events
