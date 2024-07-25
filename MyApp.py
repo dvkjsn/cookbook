@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
+from typing import List
 import psycopg2
-import datetime
 
 app = FastAPI()
 app.mount("/static_assets", StaticFiles(directory="static_assets"), name="static_assets")
@@ -13,80 +13,100 @@ username = 'postgres'
 pwd = '2005'
 port_id = 5432
 
-
-# Function to establish database connection
 def get_db_conn():
     conn = psycopg2.connect(host=hostname, dbname=database, user=username, password=pwd, port=port_id)
-    return conn  # Function to connect to PostgreSQL database and return connection object
+    return conn
 
+class Ingredients(BaseModel):
+    ingredients: List[str]
 
-now = str(datetime.datetime.now())  # Get current timestamp as a string
+@app.post("/recipe/search")
+def get_recipe_from_ingredients(ingredients: Ingredients):
+    conn = get_db_conn()
+    cur = conn.cursor()
 
+    if not ingredients.ingredients:
+        return []
 
-@app.get("/search")  # Define an HTTP GET endpoint at '/search'
-def search_recipe(keyword: str):
-    conn = get_db_conn()  # Establish database connection
-    cur = conn.cursor()  # Create a cursor object to execute SQL queries
-    SQL = """
-        SELECT Name
-        FROM recipe
-        WHERE LOWER(Name) LIKE %s
+    # Prepare placeholders for the SQL query
+    placeholders = ', '.join(['%s'] * len(ingredients.ingredients))
+
+    # SQL query to rank recipes based on the number of matching ingredients
+    SQL = f"""
+        WITH ingredient_matches AS (
+            SELECT
+                r.item_id,
+                r.name,
+                COUNT(DISTINCT i.ingredient_name) AS matching_ingredients
+            FROM recipe r
+            JOIN ingredient i ON r.item_id = i.item_id
+            WHERE i.ingredient_name IN ({placeholders})
+            GROUP BY r.item_id, r.name
+        ),
+        total_ingredients AS (
+            SELECT
+                r.item_id,
+                r.name,
+                COUNT(DISTINCT i.ingredient_name) AS total_ingredients
+            FROM recipe r
+            JOIN ingredient i ON r.item_id = i.item_id
+            GROUP BY r.item_id, r.name
+        ),
+        ranked_recipes AS (
+            SELECT
+                m.name,
+                COALESCE(m.matching_ingredients, 0) AS matching_ingredients,
+                COALESCE(t.total_ingredients, 0) AS total_ingredients,
+                CASE
+                    WHEN t.total_ingredients > 0 THEN m.matching_ingredients::FLOAT / t.total_ingredients
+                    ELSE 0
+                END AS matching_ratio
+            FROM ingredient_matches m
+            LEFT JOIN total_ingredients t ON m.item_id = t.item_id
+        )
+        SELECT
+            name
+        FROM ranked_recipes
+        ORDER BY matching_ingredients DESC, matching_ratio DESC, name
+        LIMIT 10;
     """
+
     try:
-        cur.execute(SQL, ('%' + keyword.lower() + '%',))  # Execute SQL query with keyword parameter
-        results = [row[0] for row in cur.fetchall()]  # Fetch all rows and extract recipe names
-        return results  # Return list of recipe names matching the keyword
+        cur.execute(SQL, ingredients.ingredients)
+        recipe_names = [row[0] for row in cur.fetchall()]
+        return recipe_names
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))  # Raise HTTP 500 error on database query failure
+        raise HTTPException(status_code=500, detail=str(e))
     finally:
-        cur.close()  # Close cursor
-        conn.close()  # Close database connection
+        cur.close()
+        conn.close()
 
-
-# Endpoint to fetch recipe details by name
-@app.get("/recipe/{pname}")  # Define an HTTP GET endpoint with a path parameter 'pname'
+@app.get("/recipe/{pname}")
 def get_recipe(pname: str):
-    conn = get_db_conn()  # Establish database connection
-    cur = conn.cursor()  # Create a cursor object to execute SQL queries
+    conn = get_db_conn()
+    cur = conn.cursor()
     SQL = """
         SELECT R.Name, R.Description, R.steps,
-               json_build_object('Ingredients', json_agg(I.Ingredient_Name || ': ' || I.Quantity || ' ' || I.unit))
+               json_build_object('Ingredients', json_agg(I.Ingredient_Name || ': ' || I.Quantity || ' ' || I.unit)) AS ingredients
         FROM recipe R
         JOIN Ingredient I ON R.Item_id = I.Item_id
         WHERE R.Name = %s
         GROUP BY R.Name, R.Description, R.steps
     """
     try:
-        cur.execute(SQL, (pname,))  # Execute SQL query with pname as parameter
-        recipe_data = cur.fetchone()  # Fetch the first row of the result
+        cur.execute(SQL, (pname,))
+        recipe_data = cur.fetchone()
         if recipe_data:
             return {
                 "name": recipe_data[0],
                 "description": recipe_data[1],
                 "steps": recipe_data[2],
-                "ingredients": recipe_data[3]['Ingredients']  # Return recipe details including ingredients
+                "ingredients": recipe_data[3]['Ingredients']
             }
         else:
-            raise HTTPException(status_code=404,
-                                detail=f"Recipe '{pname}' not found")  # Raise HTTP 404 if recipe not found
+            raise HTTPException(status_code=404, detail=f"Recipe '{pname}' not found")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))  # Raise HTTP 500 error on database query failure
+        raise HTTPException(status_code=500, detail=str(e))
     finally:
-        cur.close()  # Close cursor
-        conn.close()  # Close database connection
-
-
-from typing import List
-
-
-class Ingredients(BaseModel):
-    ingredients: List[str]
-
-
-# fetch("http://127.0.0.1:8000/recipe/search" , {method:"POST",headers: {
-#             'Content-Type': 'application/json'
-#         },body: JSON.stringify({ingredients:["recipe","cookbook"]})})
-
-@app.post("/recipe/search")  # Define an HTTP GET endpoint with a path parameter 'pname'
-def get_recipe_from_ingredients(ingredients: Ingredients):
-
+        cur.close()
+        conn.close()

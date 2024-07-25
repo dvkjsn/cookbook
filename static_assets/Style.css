@@ -37,51 +37,37 @@ input[type="text"] {
 .result-box {
     margin-top: 10px; /* Add space above the result box */
     border: 1px solid #ccc; /* Add a light gray border */
+    padding: 10px; /* Add padding inside the result box */
     border-radius: 5px; /* Round the corners of the result box */
-    background: #f9f9f9; /* Set a light gray background color */
-    max-height: 300px; /* Set a maximum height */
-    overflow-y: auto; /* Add a vertical scrollbar if content overflows */
+    background-color: #fff; /* Set the background color to white */
+    display: none; /* Hide the result box by default */
 }
 
-/* Remove default styling for the list inside the result box */
-.result-box ul {
-    list-style-type: none; /* Remove bullet points */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
-}
-
-/* Style for each list item in the result box */
+/* Style for individual list items in the result box */
 .result-box li {
-    padding: 10px; /* Add padding inside each list item */
-    cursor: pointer; /* Change the cursor to pointer on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    padding: 5px; /* Add padding inside each list item */
+    margin: 5px 0; /* Add vertical margin between items */
+    border: 1px solid #ddd; /* Add a light gray border */
+    border-radius: 3px; /* Round the corners of the list items */
 }
 
-/* Change the background color of list items on hover */
+/* Change background color on hover */
 .result-box li:hover {
-    background-color: #f0f0f0; /* Set a slightly darker background color */
+    background-color: #f0f0f0; /* Light gray background on hover */
 }
 
-/* Style for the recipe details container */
+/* Style for the recipe details section */
 .recipe-details {
-    margin-top: 20px; /* Add space above the recipe details */
-    padding: 10px; /* Add padding inside the recipe details container */
+    margin-top: 20px; /* Add space above the recipe details section */
     border: 1px solid #ccc; /* Add a light gray border */
-    border-radius: 5px; /* Round the corners of the recipe details */
-    background: #f9f9f9; /* Set a light gray background color */
+    padding: 10px; /* Add padding inside the recipe details section */
+    border-radius: 5px; /* Round the corners of the recipe details section */
+    background-color: #fff; /* Set the background color to white */
 }
 
-/* Style for headings inside the recipe details */
-.recipe-details h3, .recipe-details h4 {
-    margin: 0; /* Remove default margin */
-}
-
-/* Add margin and padding for lists inside the recipe details */
+/* Style for recipe ingredient list items */
 .recipe-details ul {
-    margin-top: 5px; /* Add space above the list */
-    padding-left: 20px; /* Add space to the left of the list items */
-}
-
-/* Preserve whitespace in paragraphs inside the recipe details */
-.recipe-details p {
-    white-space: pre-line; /* Preserve whitespace and add line breaks */
+    list-style-type: square; /* Use square bullets for the list */
+    padding-left: 20px; /* Add padding to the left of the list */
 }
