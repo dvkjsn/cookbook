@@ -3,123 +3,113 @@ const inputBox = document.getElementById("input-box");
 const resultBox = document.getElementById("result-box");
 
 // Debounce function to limit the rate of search requests
-// This function prevents the search from being executed too frequently
 function debounce(func, delay) {
     let timer;
     return function (...args) {
-        clearTimeout(timer); // Clear the previous timer
-        timer = setTimeout(() => func.apply(this, args), delay); // Set a new timer
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
     };
 }
 
 // Attach event listener to input box with debounced search function
-// This ensures the searchRecipes function is called only after a short delay
 inputBox.addEventListener("input", debounce(searchRecipes, 300));
 
 // Function to perform the search based on user input
 function searchRecipes() {
-    // Get and clean up the keywords from the input box
     const keywords = inputBox.value.trim().split(',').map(ingredient => ingredient.trim());
 
-    // Check if there are any keywords to search
     if (keywords.length > 0) {
-        // Send a POST request to the server with the list of ingredients
         fetch('/recipe/search', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' // Set the request content type
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ ingredients: keywords }) // Send the keywords as JSON
+            body: JSON.stringify({ ingredients: keywords })
         })
-        .then(response => response.json()) // Parse the JSON response
+        .then(response => response.json())
         .then(results => {
-            displayResults(results); // Display the search results
+            if (results.length > 0) {
+                displayResults(results);
+                resultBox.style.display = 'block'; // Show result box if there are results
+            } else {
+                resultBox.style.display = 'none'; // Hide result box if no results
+            }
         })
         .catch(error => {
-            console.error('Error fetching data:', error); // Log errors
-            resultBox.innerHTML = '<p>Error fetching data</p>'; // Show error message in result box
+            console.error('Error fetching data:', error);
+            resultBox.innerHTML = '<p>Error fetching data</p>';
+            resultBox.style.display = 'none'; // Hide result box on error
         });
     } else {
-        resultBox.innerHTML = ''; // Clear results if no keywords are provided
+        resultBox.style.display = 'none'; // Hide result box if no keywords are provided
     }
 }
 
 // Function to display the search results in the result box
 function displayResults(results) {
-    resultBox.innerHTML = ''; // Clear any existing content in the result box
-
-    // Check if there are no results
+    resultBox.innerHTML = '';
     if (results.length === 0) {
-        resultBox.innerHTML = '<p>No recipes found.</p>'; // Show a no results message
+        resultBox.innerHTML = '<p>No recipes found.</p>';
         return;
     }
 
-    resultBox.style.display = 'block'; // Make sure the result box is visible
-
-    const ul = document.createElement('ul'); // Create a new unordered list element
+    const ul = document.createElement('ul');
 
     results.forEach(result => {
-        const li = document.createElement('li'); // Create a new list item for each result
-        li.textContent = result; // Set the text content of the list item
-
-        // Set up an event handler for when the list item is clicked
+        const li = document.createElement('li');
+        li.textContent = result;
         li.onclick = () => {
-            fetchRecipe(result); // Fetch details for the selected recipe
-
-            // Clear the list and hide the result box after a recipe is selected
+            fetchRecipe(result);
             resultBox.innerHTML = '';
             resultBox.style.display = 'none';
         };
-
-        ul.appendChild(li); // Add the list item to the unordered list
+        ul.appendChild(li);
     });
 
-    resultBox.appendChild(ul); // Add the unordered list to the result box
+    resultBox.appendChild(ul);
 }
 
 // Function to fetch and display a specific recipe based on its name
 function fetchRecipe(recipeName) {
-    inputBox.value = recipeName; // Set the input box to the selected recipe name
+    inputBox.value = recipeName;
 
-    // Send a GET request to fetch the recipe details
     fetch(`/recipe/${encodeURIComponent(recipeName)}`)
         .then(response => {
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`); // Throw error for failed requests
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return response.json(); // Parse the JSON response
+            return response.json();
         })
         .then(recipeData => {
-            displayRecipe(recipeData); // Display the fetched recipe details
+            displayRecipe(recipeData);
         })
         .catch(error => {
-            console.error('Error fetching recipe data:', error); // Log errors
-            displayRecipeNotFound(recipeName); // Display a not found message if the recipe is not fetched
+            console.error('Error fetching recipe data:', error);
+            displayRecipeNotFound(recipeName);
         });
 }
 
 // Function to display recipe details in the designated HTML elements
 function displayRecipe(recipeData) {
-    document.getElementById('name').innerText = recipeData.name; // Set the recipe name
-    document.getElementById('description').innerText = recipeData.description; // Set the recipe description
+    document.getElementById('name').innerText = recipeData.name;
+    document.getElementById('description').innerText = recipeData.description;
 
-    const ingredientsList = document.getElementById('ingredients'); // Get the ingredients list element
-    ingredientsList.innerHTML = ''; // Clear any existing ingredients
+    const ingredientsList = document.getElementById('ingredients');
+    ingredientsList.innerHTML = '';
 
-    // Add each ingredient to the ingredients list
     recipeData.ingredients.forEach(ingredient => {
-        const li = document.createElement('li'); // Create a new list item
-        li.textContent = ingredient; // Set the text content of the list item
-        ingredientsList.appendChild(li); // Add the list item to the ingredients list
+        const li = document.createElement('li');
+        li.textContent = ingredient;
+        ingredientsList.appendChild(li);
     });
 
-    document.getElementById('steps').innerText = recipeData.steps; // Set the recipe steps
+    document.getElementById('steps').innerText = recipeData.steps;
 }
 
 // Function to handle the case where a recipe is not found
 function displayRecipeNotFound(recipeName) {
-    document.getElementById('name').innerText = `Recipe Not Found for: ${recipeName}`; // Show a not found message
-    document.getElementById('description').innerText = ''; // Clear the description
-    document.getElementById('ingredients').innerHTML = ''; // Clear the ingredients list
-    document.getElementById('steps').innerText = ''; // Clear the steps
+    document.getElementById('name').innerText = `Recipe Not Found for: ${recipeName}`;
+    document.getElementById('description').innerText = '';
+    document.getElementById('ingredients').innerHTML = '';
+    document.getElementById('steps').innerText = '';
 }

@@ -1,73 +1,174 @@
-/* Set the default styling for the body of the webpage */
+/* General Styles */
 body {
-    font-family: Didot, serif; /* Use Didot font, fallback to serif */
-    margin: 30px; /* Add margin around the body */
-    padding: 0; /* Remove default padding */
-    background-color: #E6E6FA; /* Set a light lavender background color */
-    color: #4B0082; /* Set the text color to indigo */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fefae0;
+    color: #333;
+}
+
+/* Splash Screen Styles */
+.splash-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #fefae0; /* Light beige background */
+    text-align: center;
+    color: #d56a4f; /* Terracotta red color for text */
+    font-family: 'Didot', serif; /* Elegant font for splash screen */
+}
+
+.splash-screen h1 {
+    font-size: 48px; /* Larger font size for title */
+    margin-bottom: 20px;
+}
+
+.splash-screen .book-icon {
+    font-size: 120px; /* Larger book icon */
+    color: #d56a4f; /* Terracotta red color */
+    margin-bottom: 20px;
+}
+
+.splash-screen .go-button {
+    font-size: 24px; /* Larger font size for button text */
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #d56a4f; /* Terracotta red button background */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.splash-screen .go-button:hover {
+    background-color: #b74a3b; /* Darker terracotta red on hover */
+}
+
+/* Main Content Styles */
+.container {
+    display: none; /* Hidden initially */
+    margin: 30px;
+    background: #fff1e6; /* Light background for the content box */
+    min-height: 100vh; /* Full viewport height */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Style for the background color of the main content area */
+.main-content-bg {
+    background: #e0cfc4; /* Slightly darker beige than the content box */
+    padding: 30px; /* Add padding to ensure contrast */
+}
+
+/* Centered title */
+.centered {
+    text-align: center;
+    color: #004d40; /* Muted teal color */
+    margin-bottom: 20px;
+    font-size: 36px;
+    font-weight: bold;
 }
 
 /* Style for the search box container */
 .search-box {
-    width: 600px; /* Set the width of the search box */
-    background: #fff; /* Set the background color to white */
-    margin: 20px auto; /* Center the search box horizontally and add vertical margin */
-    border-radius: 5px; /* Round the corners of the search box */
-    padding: 10px; /* Add padding inside the search box */
+    width: 700px;
+    background: #fff; /* Light background for the search box */
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 /* Style for row elements to align items horizontally */
 .row {
-    display: flex; /* Use flexbox layout(dynamically change size) */
-    align-items: center; /* Center items vertically */
+    display: flex;
+    align-items: center;
 }
 
 /* Style for the input text field */
 input[type="text"] {
-    flex: 1; /* Allow the input to grow and fill available space */
-    height: 40px; /* Set the height of the input field */
-    padding: 8px; /* Add padding inside the input field */
-    margin-right: 10px; /* Add space to the right of the input field */
-    font-size: 16px; /* Set the font size of the text */
-    border: 1px solid #ccc; /* Add a light gray border */
-    border-radius: 5px; /* Round the corners of the input field */
+    flex: 1;
+    height: 50px;
+    padding: 12px;
+    margin-right: 15px;
+    font-size: 18px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #004d40; /* Muted teal border on focus */
+    outline: none;
 }
 
 /* Style for the result box container */
 .result-box {
-    margin-top: 10px; /* Add space above the result box */
-    border: 1px solid #ccc; /* Add a light gray border */
-    padding: 10px; /* Add padding inside the result box */
-    border-radius: 5px; /* Round the corners of the result box */
-    background-color: #fff; /* Set the background color to white */
-    display: none; /* Hide the result box by default */
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #fff; /* Light background for the result box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default, shown when there are results */
 }
 
 /* Style for individual list items in the result box */
 .result-box li {
-    cursor: pointer; /* Change cursor to pointer on hover */
-    padding: 5px; /* Add padding inside each list item */
-    margin: 5px 0; /* Add vertical margin between items */
-    border: 1px solid #ddd; /* Add a light gray border */
-    border-radius: 3px; /* Round the corners of the list items */
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center; /* Align items vertically */
 }
 
-/* Change background color on hover */
+.result-box li::before {
+    content: '\f5d1'; /* Font Awesome icon for food */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 10px;
+}
+
 .result-box li:hover {
-    background-color: #f0f0f0; /* Light gray background on hover */
+    background-color: #f5f5f5;
+    transform: scale(1.02);
 }
 
-/* Style for the recipe details section */
+/* Style for recipe details section */
 .recipe-details {
-    margin-top: 20px; /* Add space above the recipe details section */
-    border: 1px solid #ccc; /* Add a light gray border */
-    padding: 10px; /* Add padding inside the recipe details section */
-    border-radius: 5px; /* Round the corners of the recipe details section */
-    background-color: #fff; /* Set the background color to white */
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Style for recipe ingredient list items */
 .recipe-details ul {
-    list-style-type: square; /* Use square bullets for the list */
-    padding-left: 20px; /* Add padding to the left of the list */
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.recipe-details ul li {
+    margin-bottom: 5px;
+}
+
+/* Additional styling for better presentation */
+.recipe-details h2 {
+    color: #004d40; /* Muted teal color for headings */
+    font-size: 28px; /* Larger font size */
+    margin-bottom: 15px;
+}
+
+.recipe-details p {
+    font-size: 18px;
+    line-height: 1.6;
 }
