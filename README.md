@@ -7,6 +7,7 @@ The backend is powered by FastAPI and PostgreSQL, while the frontend is designed
 # Features
 
 Ingredient-Based Search: Enter ingredients you have and find recipes that use them.
+
 Recipe Details: View detailed ingredient lists and step-by-step instructions for each recipe.
 
 # Website
