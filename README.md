@@ -39,4 +39,5 @@ To get this project up and running on your local machine, follow these steps:
  3. **Install Dependencies:** pip install fastapi psycopg2-binary
  4. **Set Up PostgreSQL:** Download PostgreSQL for your system using this link: https://www.postgresql.org/download/
  5. **If you have not already done so, download an IDE:** You can use any IDE, I used Pycharm which you can download here: https://www.jetbrains.com/pycharm/download/?section=mac
+ 6. **Restoring from the Database:** At your command prompt, run the following command: `psql -f totalBackup.sql -U postgres total`. Note that the total database must exist already.
 
