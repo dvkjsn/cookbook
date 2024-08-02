@@ -2,12 +2,13 @@
 const inputBox = document.getElementById("input-box");
 const resultBox = document.getElementById("result-box");
 
-// Debounce function to limit the rate of search requests
+
+// This function prevents the search from being executed too frequently
 function debounce(func, delay) {
     let timer;
     return function (...args) {
-        clearTimeout(timer);
-        timer = setTimeout(() => func.apply(this, args), delay);
+        clearTimeout(timer); // Clear the previous timer
+        timer = setTimeout(() => func.apply(this, args), delay); // Set a new timer
     };
 }
 
@@ -138,3 +139,4 @@ function displayRecipeNotFound(recipeName) {
                 console.error('Go button not found'); // Log error if button is not found
             }
         });
+
