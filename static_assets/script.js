@@ -113,3 +113,28 @@ function displayRecipeNotFound(recipeName) {
     document.getElementById('ingredients').innerHTML = '';
     document.getElementById('steps').innerText = '';
 }
+
+ // Handle splash screen transition
+        document.addEventListener('DOMContentLoaded', function() {
+            const goButton = document.querySelector('.go-button');
+
+            if (goButton) {
+                goButton.addEventListener('click', function() {
+                    console.log('Go button clicked'); // Log message when button is clicked
+
+                    const splashScreen = document.querySelector('.splash-screen');
+                    const container = document.querySelector('.container');
+
+                    if (splashScreen && container) {
+                        splashScreen.style.display = 'none';
+                        container.style.display = 'block';
+                        document.body.style.overflow = 'auto'; // Enable scrolling on body
+                        console.log('Transition complete'); // Log message after transition
+                    } else {
+                        console.error('Elements not found'); // Log error if elements are not found
+                    }
+                });
+            } else {
+                console.error('Go button not found'); // Log error if button is not found
+            }
+        });
